@@ -9,8 +9,9 @@ var post_options = {
 $("#save").click(function() {
   post_options.data = JSON.stringify({
           "heading": $("#heading").text(),
-          "body": $("#is-code").is(":checked") ? "<pre>" + $("#inputext").val() + "</pre>" : $("#inputext").val(),
-          "footer": $("#is-footer").is(":checked") ? false : true
+          "body": $("#inputext").val(),
+          "footer": $("#is-footer").is(":checked") ? false : true,
+          "code": $("#is-code").is(":checked") ? true : false
         });
   $.ajax(post_options).done(function (response) {
     window.location.href = response;
@@ -19,4 +20,10 @@ $("#save").click(function() {
   });
 });
 $("#inputext").keyup(function() {
-  $("#body").show().html(marked($("#is-code").is(":checked")?"<pre>"+$("#inputext").val()+"</pre>": $("#inputext").val()))});
+  if ($("#is-code").is(":checked")) {
+    $("#body").show().html("<pre id='code'></pre>");
+    $("#code").text($(this).val());
+  } else {
+    $("#body").show().html(marked($(this).val()));
+  } 
+});
