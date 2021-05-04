@@ -1,0 +1,27 @@
+{
+  "name": "codepen",
+  "version": "0.1.0",
+  "description": "A website to render html and markdown codes.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js 127.0.0.1 8080"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/viperadnan-git/codepen.git"
+  },
+  "keywords": [
+    "render",
+    "render-html",
+    "render-md",
+    "html",
+    "markdown",
+    "pastebin"
+  ],
+  "author": "viperadnan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/viperadnan-git/codepen/issues"
+  },
+  "homepage": "https://github.com/viperadnan-git/codepen#readme"
+}
