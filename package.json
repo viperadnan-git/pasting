@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/viperadnan-git/codepen/issues"
   },
-  "homepage": "https://github.com/viperadnan-git/codepen#readme"
+  "homepage": "https://github.com/viperadnan-git/codepen#readme",
+  "dependencies": {
+    "request": "^2.88.2"
+  }
 }

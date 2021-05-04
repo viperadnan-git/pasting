@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <title>codepen</title>
+  <title>pasting.codes</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicons/apple-touch-icon.png">
@@ -49,7 +49,7 @@
 <body>
   <nav class="navbar navbar-dark bg-black">
     <div class="container-fluid">
-      <span contenteditable="true" id="heading" class="navbar-brand mb-0 fw-bolder">codepen</span>
+      <span contenteditable="true" id="heading" class="navbar-brand mb-0 fw-bolder">pasting.codes</span>
       <button id="save" class="btn btn-dark">
           <img width="24" src="assets/images/save.png">
       </button>
@@ -67,29 +67,11 @@
     </div>
     </div>
     <textarea id="inputext" class="form-control my-2" placeholder="Write something..."></textarea>
-    <div id="home"></div>
+    <div id="body"></div>
   </div>
   <footer class="d-flex justify-content-center mb-2">
     <a href="https://viperadnan-git.github.io"><span class="badge bg-black badge-left">viperadnan</span><span class="badge text-dark badge-right">&lt;&sol;&gt;</span></a>
   </footer>
-  <script>
-    const dogbin_api_url = "https://del.dog/documents";
-    $("#save").click(function() {
-      $.ajax({
-        method: "POST",
-        url: dogbin_api_url,
-        data: JSON.stringify({
-          "heading": $("#heading").text(),
-          "home": $("#is-code").is(":checked") ? "<pre>" + $("#inputext").val() + "<pre>" : $("#inputext").val(),
-          "footer": $("#is-footer").is(":checked") ? false : true
-        })
-      }).done(function(data, textStatus, jqXHR) {
-        window.location.href = "/" + data.key;
-      })
-    });
-    $("#inputext").keyup(function() {
-      $("#home").show().html(marked($("#is-code").is(":checked") ? "<pre>" + $("#inputext").val() + "</pre>" : $("#inputext").val()))
-    });
-  </script>
+    <script src="/assets/js/index.js"></script>
 </body>
 </html>
