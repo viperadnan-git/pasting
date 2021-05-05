@@ -46,7 +46,7 @@ var get_options = {
 };
 
 http.createServer(function (req, res) {
-  // console.log(`${req.method} ${req.url}`);
+  console.log(`${req.method} ${req.url}`);
   const parsedUrl = url.parse(req.url);
   let pathname = `${parsedUrl.pathname}`;
   const ext = path.parse(pathname).ext;
@@ -74,18 +74,22 @@ http.createServer(function (req, res) {
       }
     });
   } else if (pathname == "/api" && req.method == "POST") {
-    req.once('data', data => {
-      if (IsJsonContentString(data)) {
-        post_options.body = data.toString();
+    let body = "";
+    req.on('data', chunk => {
+      body += chunk.toString();
+    });
+    req.on('end', () => {
+      if (IsJsonContentString(body)) {
+        post_options.body = body;
         request(post_options, function (error, response) {
           if (error || response.statusCode != 200) {
-            console.log(error); res.statusCode = 400; res.end("Bad Request - Try Again Later");
+            console.log(error); res.statusCode = 500; res.end("Internal Error - Try Again Later");
           } else {
             res.end(url.parse(JSON.parse(response.body).url).pathname);
           }});
       } else {
         res.statusCode = 400;
-        res.end("Bad Request - Invalid JSON or JSON doesn't have any key named\"body\"");
+        res.end("Bad Request - Invalid JSON or JSON doesn't have any key named \"body\"");
       }
     });
   } else if (pathname.startsWith("/raw/")) {
