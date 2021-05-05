@@ -74,7 +74,7 @@ http.createServer(function (req, res) {
       }
     });
   } else if (pathname == "/api" && req.method == "POST") {
-    req.on('data', data => {
+    req.once('data', data => {
       if (IsJsonContentString(data)) {
         post_options.body = data.toString();
         request(post_options, function (error, response) {
