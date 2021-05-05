@@ -12,10 +12,6 @@
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
   <style>
-    textarea {
-      width: 100%;
-      height: 150px;
-    }
     .bg-black {
       background-color: #333;
     }
@@ -27,15 +23,10 @@
     .navbar-brand {
       font-size: 32px;
     }
-    :focus {
-      outline: 0;
-      outline-color: transparent;
-      outline-style: none;
-    }
     .badge {
       font-weight: normal;
       font-size: 8px;
-      padding:3px 5px 3px 5px;
+      padding: 3px 5px 3px 5px;
     }
     .badge-left {
       border-radius: 3px 0 0 3px;
@@ -49,29 +40,21 @@
 <body>
   <nav class="navbar navbar-dark bg-black">
     <div class="container-fluid">
-      <span contenteditable="true" id="heading" class="navbar-brand mb-0 fw-bolder">pasting.codes</span>
-      <button id="save" class="btn btn-dark">
-          <img width="24" src="assets/images/save.png">
+      <span id="heading" class="navbar-brand mb-0 fw-bolder"></span>
+      <button id="raw-button" class="btn btn-dark d-none" onclick="window.location.href = '/raw' + window.location.pathname">
+        <span>&laquo;&nbsp;&raquo;</span>
       </button>
     </div>
   </nav>
   <div class="container my-3">
-    <div class="d-flex justify-content-end">
-    <div class="d-inline-block form-check form-switch mx-auto">
-      <input class="form-check-input" type="checkbox" id="is-code">
-      <label class="form-check-label" for="is-code">Paste as Code</label>
-    </div>
-    <div class="d-inline-block form-check mx-auto">
-      <input class="form-check-input" type="checkbox" id="is-footer">
-      <label class="form-check-label" for="is-footer">Hide Watermark</label>
-    </div>
-    </div>
-    <textarea id="inputext" class="form-control my-2" placeholder="Type something..."></textarea>
     <div id="body"></div>
   </div>
-  <footer class="d-flex justify-content-center mb-3">
+  <footer id="is-footer" class="d-none d-flex justify-content-center mb-3">
     <a href="https://viperadnan-git.github.io"><span class="badge bg-black badge-left">viperadnan</span><span class="badge text-dark badge-right">&lt;&sol;&gt;</span></a>
   </footer>
-    <script src="/assets/js/index.js"></script>
+  <script>
+    const json = #JSON-TEXT
+  </script>
+  <script src="/assets/js/paste.js"></script>
 </body>
 </html>

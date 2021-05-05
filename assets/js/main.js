@@ -7,12 +7,14 @@ var post_options = {
   }
 };
 $("#save").click(function() {
+  $("#save").html(`<div class="spinner-border text-light spinner-border-sm" role="status"><span class="visually-hidden">Loading...</span></div>`);
   post_options.data = JSON.stringify({
-          "heading": $("#heading").text(),
-          "body": $("#inputext").val(),
-          "footer": $("#is-footer").is(":checked") ? false : true,
-          "code": $("#is-code").is(":checked") ? true : false
-        });
+    "heading": $("#heading").text(),
+    "body": $("#inputext").val(),
+    "code": $("#is-code").is(":checked") ? true: false,
+    "raw": $("#is-raw").is(":checked") ? true: false,
+    "footer": $("#is-footer").is(":checked") ? true: false
+  });
   $.ajax(post_options).done(function (response) {
     window.location.href = response;
   }).fail(function(response) {
@@ -25,5 +27,5 @@ $("#inputext").keyup(function() {
     $("#code").text($(this).val());
   } else {
     $("#body").show().html(marked($(this).val()));
-  } 
+  }
 });
