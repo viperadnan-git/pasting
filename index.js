@@ -46,7 +46,7 @@ var get_options = {
 };
 
 http.createServer(function (req, res) {
-  console.log(`${req.method} ${req.url}`);
+  // console.log(`${req.method} ${req.url}`);
   const parsedUrl = url.parse(req.url);
   let pathname = `${parsedUrl.pathname}`;
   const ext = path.parse(pathname).ext;
