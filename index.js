@@ -85,7 +85,7 @@ http.createServer(function (req, res) {
           }});
       } else {
         res.statusCode = 400;
-        res.end("Bad Request - Invalid JSON or JSON doesn\'t have any key named \"body\"");
+        res.end("Bad Request - Invalid JSON or JSON doesn't have any key named\"body\"");
       }
     });
   } else if (pathname.startsWith("/raw/")) {
