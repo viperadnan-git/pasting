@@ -1,6 +1,6 @@
 {
   "name": "pasting-codes",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A website to render html and markdown codes.",
   "main": "index.js",
   "scripts": {

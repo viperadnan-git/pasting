@@ -3,7 +3,7 @@ var post_options = {
   "method": "POST",
   "timeout": 0,
   "headers": {
-    "Content-Type": "text/plain"
+    "Content-Type": "application/json"
   }
 };
 $("#save").click(function() {
@@ -17,8 +17,9 @@ $("#save").click(function() {
   });
   $.ajax(post_options).done(function (response) {
     window.location.href = response;
-  }).fail(function(response) {
-    alert(response.status);
+  }).fail(function(request, status, error) {
+    alert(`${request.status} ${status} - ${error}`);
+    $("#save").html(`<img width="24" src="assets/images/save.png">`);
   });
 });
 $("#inputext").keyup(function() {

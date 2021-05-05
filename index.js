@@ -64,7 +64,7 @@ http.createServer(function (req, res) {
     fs.readFile('.' + pathname, function(err, data) {
       if (err) {
         fs.readFile("./assets/paste.html", function(err, data) {
-          res.statusCode = 404;
+          res.statusCode = 500;
           res.setHeader('Content-Type', 'text/html');
           res.end(Buffer.from(data.toString().replace('#JSON-TEXT', JSON.stringify(page_500))));
         });
@@ -75,22 +75,26 @@ http.createServer(function (req, res) {
     });
   } else if (pathname == "/api" && req.method == "POST") {
     req.on('data', data => {
-      post_options.body = data.toString();
-      request(post_options, function (error, response) {
-        if (error) {
-          console.log(error); res.end("Bad Request - Try Again Later");
-        } else {
-          res.end(url.parse(JSON.parse(response.body).url).pathname);
-        }});
+      if (IsJsonContentString(data)) {
+        post_options.body = data.toString();
+        request(post_options, function (error, response) {
+          if (error || response.statusCode != 200) {
+            console.log(error); res.statusCode = 400; res.end("Bad Request - Try Again Later");
+          } else {
+            res.end(url.parse(JSON.parse(response.body).url).pathname);
+          }});
+      } else {
+        res.statusCode = 400;
+        res.end("Bad Request - Invalid JSON or JSON doesn\'t have any key named \"body\"");
+      }
     });
   } else if (pathname.startsWith("/raw/")) {
     get_options.url = "https://dumpz.org/"+pathname.substr(5)+"/text/?password="+password;
     request(get_options, function(error, response) {
-      if (response.statusCode != 200 || !JSON.parse(response.body).raw) {
+      if (response.statusCode != 200 || !IsJsonContentString(response.body) || !JSON.parse(response.body).raw) {
         fs.readFile("./assets/paste.html", function(err, data) {
           res.statusCode = 404;
-          res.setHeader('Content-Type', 'text/html');
-          res.end(Buffer.from(data.toString().replace('#JSON-TEXT', JSON.stringify(page_404))));
+          res.end("404 - Page Not Found");
         });
       } else {
         res.setHeader('Content-Type', 'text/plain');
@@ -100,7 +104,7 @@ http.createServer(function (req, res) {
   } else {
     get_options.url = "https://dumpz.org"+pathname+"/text/?password="+password;
     request(get_options, function (error, response) {
-      if (response.statusCode != 200) {
+      if (response.statusCode != 200 || !IsJsonContentString(response.body)) {
         fs.readFile('./assets/paste.html', function(err, data) {
           res.statusCode = 404;
           res.setHeader('Content-Type', 'text/html');
@@ -120,5 +124,12 @@ http.createServer(function (req, res) {
     });
   }
 }).listen(parseInt(port), hostname);
+
+function IsJsonContentString(str) {
+  try {
+    return JSON.parse(str).body ? true: false;
+  }catch(e) {
+    return false;
+  }}
 
 console.log(`Server listening on ${hostname}:${port}`);
