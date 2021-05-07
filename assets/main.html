@@ -14,7 +14,11 @@
   <style>
     textarea {
       width: 100%;
-      height: 150px;
+      height: 180px;
+      white-space: nowrap;
+      overflow: auto;
+      overflow-x: scroll;
+      overflow-y: scroll;
     }
     .bg-black {
       background-color: #333;
@@ -42,6 +46,9 @@
       border-radius: 0 3px 3px 0;
       background-color: #ededed;
     }
+    #content {
+      word-wrap: break-word;
+    }
   </style>
 </head>
 <body>
@@ -53,25 +60,29 @@
       </button>
     </div>
   </nav>
-  <div class="container my-3">
-    <div class="d-flex justify-content-end">
-      <div class="d-inline-block form-check form-switch mx-auto">
+  <div class="container my-2">
+    <div class="justify-content-start">
+      <div class="d-inline-block form-check form-switch ms-2">
         <input class="form-check-input" type="checkbox" id="is-code">
         <label class="form-check-label" for="is-code">Code</label>
       </div>
-      <div class="d-inline-block form-check form-switch mx-auto">
+      <div class="d-inline-block form-check form-switch ms-2">
         <input class="form-check-input" type="checkbox" id="is-raw" checked>
         <label class="form-check-label" for="is-raw">Raw</label>
       </div>
-      <div class="d-inline-block form-check form-switch mx-auto">
+      <div class="d-inline-block form-check form-switch ms-2">
         <input class="form-check-input" type="checkbox" id="is-footer" checked>
         <label class="form-check-label" for="is-footer">Watermark</label>
       </div>
+      <div class="d-inline-block form-check form-switch ms-2">
+        <input class="form-check-input" type="checkbox" id="live-output">
+        <label class="form-check-label" for="live-output">Expand</label>
+      </div>
     </div>
     <textarea id="inputext" class="form-control my-2" placeholder="Type something..."></textarea>
-    <div id="body"></div>
+    <div id="content"></div>
   </div>
-  <footer class="d-flex justify-content-center mb-3">
+  <footer class="d-flex justify-content-center mb-2">
     <a href="https://viperadnan-git.github.io"><span class="badge bg-black badge-left">viperadnan</span><span class="badge text-dark badge-right">&lt;&sol;&gt;</span></a>
   </footer>
   <script src="/assets/js/main.js"></script>

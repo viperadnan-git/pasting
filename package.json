@@ -1,6 +1,6 @@
 {
   "name": "pasting-codes",
-  "version": "0.2.2",
+  "version": "0.2.4",
   "description": "A website to render html and markdown codes.",
   "main": "index.js",
   "scripts": {
@@ -25,6 +25,9 @@
   },
   "homepage": "https://github.com/viperadnan-git/codepen#readme",
   "dependencies": {
+    "cheerio": "*",
+    "highlight.js": "^10.7.2",
+    "marked": "^2.0.3",
     "request": "^2.88.2"
   }
 }

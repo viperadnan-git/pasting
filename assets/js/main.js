@@ -10,7 +10,7 @@ $("#save").click(function() {
   $("#save").html(`<div class="spinner-border text-light spinner-border-sm" role="status"><span class="visually-hidden">Loading...</span></div>`);
   post_options.data = JSON.stringify({
     "heading": $("#heading").text(),
-    "body": $("#inputext").val(),
+    "content": $("#inputext").val(),
     "code": $("#is-code").is(":checked") ? true: false,
     "raw": $("#is-raw").is(":checked") ? true: false,
     "footer": $("#is-footer").is(":checked") ? true: false
@@ -23,10 +23,21 @@ $("#save").click(function() {
   });
 });
 $("#inputext").keyup(function() {
-  if ($("#is-code").is(":checked")) {
-    $("#body").show().html("<pre id='code'></pre>");
-    $("#code").text($(this).val());
+  if (!$("#content").hasClass("d-none")) {
+    if ($("#is-code").is(":checked")) {
+      $("#content").show().html("<pre><xmp id='code'></xmp></pre>");
+      $("#code").text($(this).val());
+    } else {
+      $("#content").show().html(marked($(this).val()));
+    }
+  }
+});
+$("#live-output").click(function() {
+  if ($(this).is(":checked")) {
+    $("#inputext").css("height", (screen.height / 1.6) + "px");
+    $("#content").addClass("d-none");
   } else {
-    $("#body").show().html(marked($(this).val()));
+    $("#inputext").css("height", "180px");
+    $("#content").removeClass("d-none");
   }
 });
