@@ -127,15 +127,16 @@ function IsJsonContentString(str) {
     return JSON.parse(str).content ? true: false;
   } catch(e) {
     return false;
-  }}
+  }
+}
 
-function getPage(json, name="pasting.codes") {
+function getPage(json, heading="pasting.codes") {
   if (json.heading) {
     pasteHTML("#heading").text(json.heading);
     pasteHTML("title").text(json.heading);
   } else {
-    pasteHTML("#heading").text(name);
-    pasteHTML("title").text(name);
+    pasteHTML("#heading").text(heading);
+    pasteHTML("title").text(heading);
   }
   json.raw ? pasteHTML("#raw-button").removeClass("d-none"): pasteHTML("#raw-button").addClass("d-none");
   json.footer ? pasteHTML("#is-footer").removeClass("d-none"): pasteHTML("#is-footer").addClass("d-none");

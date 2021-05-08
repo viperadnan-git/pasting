@@ -25,10 +25,10 @@ $("#save").click(function() {
 $("#inputext").keyup(function() {
   if (!$("#content").hasClass("d-none")) {
     if ($("#is-code").is(":checked")) {
-      $("#content").show().html("<pre><xmp id='code'></xmp></pre>");
+      $("#content").html("<pre><xmp id='code'></xmp></pre>");
       $("#code").text($(this).val());
     } else {
-      $("#content").show().html(marked($(this).val()));
+      $("#content").html(marked($(this).val()));
     }
   }
 });
