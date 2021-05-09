@@ -1,5 +1,6 @@
 const express = require('express');
 const fs = require('fs');
+const url = require('url');
 const request = require('request');
 const cheerio = require('cheerio');
 const marked = require('marked');
@@ -73,7 +74,7 @@ app.post("/api", (req, res) => {
                 res.end(url.parse(JSON.parse(response.body).url).pathname);
             }});
     } else {
-        res.status(400).end("Bad Request - Invalid JSON or JSON doesn't have any key named\"content\"");
+        res.status(400).end("Bad Request - Invalid JSON or JSON doesn't have any key named \"content\"");
     }
 });
 
