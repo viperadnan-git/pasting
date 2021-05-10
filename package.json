@@ -1,6 +1,6 @@
 {
   "name": "pasting-codes",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "A website to render html and markdown codes.",
   "main": "index.js",
   "scripts": {
@@ -30,10 +30,10 @@
     "node": "14.15.4"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "cheerio": "*",
     "express": "^4.17.1",
     "highlight.js": "^10.7.2",
-    "marked": "^2.0.3",
-    "request": "^2.88.2"
+    "marked": "^2.0.3"
   }
 }

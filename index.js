@@ -1,9 +1,9 @@
-const express = require('express');
 const fs = require('fs');
 const url = require('url');
-const request = require('request');
-const cheerio = require('cheerio');
+const axios = require('axios');
 const marked = require('marked');
+const express = require('express');
+const cheerio = require('cheerio');
 const hljs = require('highlight.js');
 const app = express();
 
@@ -23,14 +23,14 @@ const page_500 = {
 };
 
 var post_options = {
-    'method': 'POST',
-    'url': 'https://dumpz.org/api/dump?password='+password+'&lexer=json',
-    'headers': {
+    method: 'post',
+    url: 'https://dumpz.org/api/dump?lexer=json&password='+password,
+    headers: {
         'Content-Type': 'application/json'
-    },
+    }
 };
 var get_options = {
-    'method': 'GET'
+    method: 'get'
 };
 
 const mainHTML = cheerio.load(fs.readFileSync("./assets/main.html"));
@@ -41,14 +41,15 @@ fs.readFile("./assets/template.html", function(error, data) {
 });
 const pasteHTML = cheerio.load(fs.readFileSync("./assets/paste.html"));
 
-app.use(express.json({
-    "limit": "50mb"
-}));
+
 app.use((req, res, next) => {
     res.header("X-Powered-By", "viperadnan");
     console.log(`${req.method} ${req.path}`);
     next();
 });
+app.use(express.json({
+    limit: '50mb'
+}));
 
 app.get("/", (req, res) => {
     res.setHeader('Content-type', 'text/html');
@@ -65,53 +66,50 @@ app.get("/assets/*/*", (req, res) => {
 
 app.post("/api", (req, res) => {
     if (req.body.content) {
-        post_options.body = JSON.stringify(req.body);
-        request(post_options, function (error, response) {
-            if (error || response.statusCode != 200) {
-                console.log(error);
-                res.status(500).end("Internal Error - Try Again Later !");
-            } else {
-                res.end(url.parse(JSON.parse(response.body).url).pathname);
-            }});
+        post_options.data = Buffer.from(JSON.stringify(req.body));
+        axios(post_options)
+        .then(function (response) {
+            res.end(url.parse(response.data.url).pathname);
+        })
+        .catch(function (error) {
+            console.error(error);
+            res.status(500).end("InternalError: Try Again Later !");
+        });
     } else {
-        res.status(400).end("Bad Request - Invalid JSON or JSON doesn't have any key named \"content\"");
+        res.status(400).end("Bad Request - Invalid JSON or JSON doesn't have any key named 'content'");
     }
 });
 
 app.get("/raw/*", (req, res) => {
     get_options.url = "https://dumpz.org/"+req.path.substr(5)+"/text/?password="+password;
-    request(get_options, function(error, response) {
-        if (response.statusCode != 200 || !IsJsonContentString(response.body) || !JSON.parse(response.body).raw) {
-            res.status(404).end("404 - Page Not Found");
-        } else {
+    axios(get_options).then((response) => {
+        if (response.data.content && response.data.raw) {
             res.setHeader('Content-Type', 'text/plain');
-            res.end(JSON.parse(response.body).content);
+            res.end(response.data.content);
+        } else {
+            res.status(404).end("404 - Page Not Found");
         }
+    }).catch((error) => {
+        res.status(404).end("404 - Page Not Found");
     });
 });
 
 app.get("/*", (req, res) => {
     get_options.url = "https://dumpz.org"+req.path+"/text/?password="+password;
-    request(get_options,
-        function (error, response) {
-            if (error || response.statusCode != 200 || !IsJsonContentString(response.body)) {
-                res.status(404).end(getPage(page_404));
-            } else {
+    axios(get_options).then(
+        (response) => {
+            if (response.data.content) {
                 res.setHeader('Content-Type', 'text/html');
-                res.end(getPage(JSON.parse(response.body), req.hostname));
+                res.end(getPage(response.data, req.hostname));
+            } else {
+                res.status(404).end(getPage(page_404));
             }
+        }).catch((error) => {
+            res.status(404).end(getPage(page_404));
         });
 });
 
-function IsJsonContentString(str) {
-    try {
-        return JSON.parse(str).content ? true: false;
-    } catch(e) {
-        return false;
-    }
-}
-
-function getPage(json, heading = "pasting.codes") {
+function getPage(json, heading="pasting.codes") {
     if (json.heading) {
         pasteHTML("#heading").text(json.heading);
         pasteHTML("title").text(json.heading);
@@ -121,7 +119,7 @@ function getPage(json, heading = "pasting.codes") {
     }
     json.raw ? pasteHTML("#raw-button").removeClass("d-none"): pasteHTML("#raw-button").addClass("d-none");
     json.footer ? pasteHTML("#is-footer").removeClass("d-none"): pasteHTML("#is-footer").addClass("d-none");
-    json.code ? pasteHTML("#content").html("<pre>"+hljs.highlightAuto(json.content).value+"</pre>"): pasteHTML("#content").html(marked(json.content));
+    json.code ? pasteHTML("#content").html("<pre id='code'>"+hljs.highlightAuto(json.content).value+"</pre>"): pasteHTML("#content").html(marked(json.content));
     return pasteHTML.html();
 }
 
