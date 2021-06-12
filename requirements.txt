@@ -1,0 +1,6 @@
+aiohttp
+aiohttp-jinja2
+cchardet
+aiodns
+deta
+tenacity
