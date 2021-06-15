@@ -1,7 +1,13 @@
 class Pages:
+    Paste404 = {
+        "heading": "404",
+        "content": """<a class="text-decoration-none text-dark" href="/"><div class="container"><h1>404 - Paste not found</h1><p><i>Unable to find your pasted code maybe it doesn't exists.</i></p><span class="text-muted small">Tap to go home</span></div></a>""",
+        "footer": True
+    }
+    
     _404 = {
         "heading": "404",
-        "content": """<a class="text-decoration-none text-dark" href="/"><div class="container"><h1>404 - Page not found</h1><p><i>Unable to find your pasted code maybe it doesn't exists.</i></p><span class="text-muted small">Tap to go home</span></div></a>""",
+        "content": """<a class="text-decoration-none text-dark" href="/"><div class="container"><h1>404 - Page not found</h1><p><i>Page you trying to reach doesn't exists.</i></p><span class="text-muted small">Tap to go home</span></div></a>""",
         "footer": True
     }
     

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>pasting.codes</title>
+    <title>{% if heading %}{{heading}}{% else %}pasting{% endif %}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -43,7 +43,7 @@
 <body>
     <nav class="navbar navbar-dark bg-black">
         <div class="container-fluid">
-            <a id="heading" href="/" class="navbar-brand mb-0 fw-bolder p-0">{% if heading %}{{heading}}{% else %}pasting.codes{% endif %}</a>
+            <a id="heading" href="/" class="navbar-brand mb-0 fw-bolder p-0">{% if heading %}{{heading}}{% else %}pasting{% endif %}</a>
             {% if raw %}
             <button id="raw-button" class="btn btn-dark py-0" onclick="window.location.href = '/raw' + window.location.pathname">
                 <span>&cuepr;&nbsp;&cuesc;</span>

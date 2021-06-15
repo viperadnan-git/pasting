@@ -17,4 +17,4 @@ async def PasteView(request):
     if data:
         return data
     else:
-        return Pages._404
+        return Pages.Paste404

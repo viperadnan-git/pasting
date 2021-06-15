@@ -19,7 +19,8 @@ async def setup_app():
         web.static('/static', './assets/static'),
         web.post('/api', ApiView),
         web.get('/raw/{key}', RawView),
-        web.get('/{key}', PasteView)
+        web.get('/{key}', PasteView),
+        web.get('/{wildcard:.*}', WildView)
         ]
     app.add_routes(routes)
     return app

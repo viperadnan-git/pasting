@@ -1,3 +1,3 @@
-from .main import MainView
-from .api import ApiView, RawView
 from .paste import PasteView
+from .api import ApiView, RawView
+from .main import MainView, WildView
