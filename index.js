@@ -39,7 +39,7 @@ const pasteHTMLraw = fs.readFileSync("./assets/paste.html");
 
 app.use(async (req, res, next) => {
     res.header("X-Powered-By", "viperadnan");
-    console.log(`${req.method} ${req.path}`);
+    // console.log(`${req.method} ${req.path}`);
     next();
 });
 app.use(express.json({
@@ -69,7 +69,7 @@ app.post("/api", async (req, res) => {
             res.status(400).end('Key can only contains alphanumeric characters');
         }
     } else {
-        res.status(400).end("Bad Request - Invalid JSON or JSON doesn't have any key named 'content'");
+        res.status(400).end("Bad Request - No content found.");
     }
 });
 
