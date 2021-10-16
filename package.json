@@ -1,6 +1,6 @@
 {
-  "name": "pasting-codes",
-  "version": "0.2.6",
+  "name": "pasting",
+  "version": "0.3.0",
   "description": "A website to render html and markdown codes.",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/viperadnan-git/pasting-codes.git"
+    "url": "git+https://github.com/viperadnan-git/pasting.git"
   },
   "keywords": [
     "render",
@@ -22,18 +22,17 @@
   "author": "viperadnan",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/viperadnan-git/pasting-codes/issues"
+    "url": "https://github.com/viperadnan-git/pasting/issues"
   },
-  "homepage": "https://github.com/viperadnan-git/pasting-codes#readme",
+  "homepage": "https://github.com/viperadnan-git/pasting#readme",
   "engines": {
-    "npm": "7.11.2",
-    "node": "14.15.4"
+    "npm": "8.1.0",
+    "node": "16.11.0"
   },
   "dependencies": {
-    "axios": "^0.21.1",
     "cheerio": "*",
+    "deta": "^1.0.1",
     "express": "^4.17.1",
-    "highlight.js": "^10.7.2",
     "marked": "^2.0.3"
   }
 }

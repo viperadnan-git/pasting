@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>pasting.codes</title>
+    <title>pasting</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicons/favicon-16x16.png">
-    <link rel="manifest" href="/assets/images/favicons/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="static/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="static/images/favicons/site.webmanifest">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
@@ -71,9 +71,9 @@
 <body>
     <nav class="navbar navbar-dark bg-black">
         <div class="container-fluid">
-            <span contenteditable="true" id="heading" class="navbar-brand mb-0 fw-bolder p-0">pasting.codes</span>
+            <span contenteditable="true" id="heading" class="navbar-brand mb-0 fw-bolder p-0">pasting</span>
             <button id="save" class="btn btn-dark">
-                <img width="24" src="assets/images/save.png">
+                <img width="24" src="static/images/save.png">
             </button>
         </div>
     </nav>
@@ -99,6 +99,9 @@
                 Upload File
                 <input type="file" id="upload-file" />
             </div>
+            <div class="d-inline-block ms-2">
+                <input style="width:104px;height:22px;font-size:14px" class="form-control " type="text" id="key-name" placeholder="Custom URL">
+            </div>
         </div>
         <textarea id="inputext" class="form-control text-nowrap my-2" placeholder="Type something..."></textarea>
         <div class="text-break" id="content"></div>
@@ -106,6 +109,7 @@
     <footer class="d-flex justify-content-center mb-2">
         <a href="https://viperadnan-git.github.io"><span class="badge bg-black badge-left">viperadnan</span><span class="badge text-dark badge-right">&lt;&sol;&gt;</span></a>
     </footer>
-    <script src="/assets/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+    <script src="static/js/main.js"></script>
 </body>
 </html>
