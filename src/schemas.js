@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const websiteName = process.env.WEBSITE_NAME
+const websiteName = process.env.WEBSITE_NAME || 'pasting';
 
 
 const schemas = {
