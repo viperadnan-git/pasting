@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title><%- website_name %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/static/images/favicons/site.webmanifest">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/js.cookie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="/static/js/sweetalert2.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            height: 100%;
+            min-height: 100vh;
+        }
+
+        .content-textarea {
+            width: 100%;
+            height: 40vh;
+            overflow: auto;
+            overflow-x: scroll;
+            overflow-y: scroll;
+        }
+
+        .bg-matte-black {
+            background-color: #28282B;
+            color: #fff;
+        }
+
+        .navbar {
+            padding: 2px;
+        }
+
+        .navbar-brand {
+            font-size: 32px;
+        }
+
+        .btn-file {
+            position: relative;
+            overflow: hidden;
+            font-size: 12px;
+            padding: 1px 6px;
+        }
+
+        .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-matte-black">
+        <div class="container-fluid">
+            <span contenteditable="true" id="heading" class="navbar-brand mb-0 fw-bolder p-0">
+                <%- website_name %>
+            </span>
+            <button id="save" class="btn" title="Save">
+                <img src="/static/images/save.svg" />
+            </button>
+        </div>
+    </nav>
+    <div class="container my-2">
+        <div class="justify-content-start">
+            <div class="d-inline-block form-check form-switch ms-2">
+                <input class="form-check-input" type="checkbox" id="is-code">
+                <label class="form-check-label" for="is-code">Code</label>
+            </div>
+            <div class="d-inline-block form-check form-switch ms-2">
+                <input class="form-check-input" type="checkbox" id="is-raw" checked>
+                <label class="form-check-label" for="is-raw">Raw</label>
+            </div>
+            <div class="d-inline-block form-check form-switch ms-2">
+                <input class="form-check-input" type="checkbox" id="live-output">
+                <label class="form-check-label" for="live-output">Expand</label>
+            </div>
+            <div class="d-inline-block btn btn-file btn-dark bg-matte-black ms-2">
+                Upload File
+                <input type="file" id="upload-file" />
+            </div>
+            <div class="d-inline-block ms-2">
+                <input style="width:104px;height:22px;font-size:14px" class="form-control p-1" type="text" id="key-name"
+                    placeholder="Custom URL" maxlength="16">
+            </div>
+        </div>
+        <textarea id="inputext" class="form-control text-nowrap my-2 content-textarea"
+            placeholder="Type something..."></textarea>
+        <div class="text-break" id="content">
+            <%- include('template', { website_name:website_name }); %>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1/dist/js/bootstrap.min.js"></script>
+    <script src="/static/js/main.js"></script>
+</body>
+
+</html>
